@@ -1,7 +1,7 @@
 services:
   book-service:
-    build: ./book-service
-    image: book-service:latest
+    # build: ./book-service
+    image: rambapu/book-service:v1
     container_name: book-service
     # ports:
     #   - 3000:3000
@@ -13,8 +13,8 @@ services:
       - book-service-db
 
   loan-service:
-    build: ./loan-service
-    image: loan-service
+    # build: ./loan-service
+    image: rambapu/loan-service:v1
     container_name: loan-service
     # ports:
     #   - 3001:3001

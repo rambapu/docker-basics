@@ -95,3 +95,11 @@ CMD: docker build -t rambapu/book-service:v1 .
 Building the image with the tag v1 and using the convention of username
 
 CMD: docker push rambapu/book-service:v1
+
+Do the same for loan-service. Get the images from the DockerHub instead of building the image from local.
+
+### Deploying to a cloud server
+
+Create a droplet (virtual VM) inside the Digital Ocean (cloud server) and install docker and docker compose in it. Then access the VM using SSH key in the terminal and copy the docker-compose and nginx.conf file to the root dir of the droplet. Once it is done, run docker-compose in the VM terminal.
+
+We can access our data in a.b.c.d/api/books instead of localhost
