@@ -1,5 +1,4 @@
-import { connect } from "mongoose";
-
+import mongoose from "mongoose";
 import Book from "../models/bookModel.js";
 
 const initialBooks = [
@@ -9,26 +8,33 @@ const initialBooks = [
 ];
 
 const initializeBookData = async () => {
-  const booksExist = await Book.countDocuments();
-  if (booksExist === 0) {
-    console.log("Seeding the database with initial book data...");
-    await Book.insertMany(initialBooks);
-    console.log("Database seeded successfully");
-  } else {
-    console.log("Books already exist in the database.");
+  try {
+    const booksExist = await Book.countDocuments();
+
+    if (booksExist === 0) {
+      console.log("Seeding the database with initial book data...");
+
+      await Book.insertMany(initialBooks);
+
+      console.log("Database seeded successfully");
+    } else {
+      console.log("Books already exist in the database.");
+    }
+  } catch (error) {
+    console.error("Error while seeding database:", error);
   }
 };
 
-const dbStart = () => {
-  connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-    .then(() => {
-      console.log("MongoDB connected: " + process.env.DATABASE_URL);
-      initializeBookData();
-    })
-    .catch((err) => console.error("MongoDB connection error:", err));
+const dbStart = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE_URL);
+
+    console.log("MongoDB connected");
+
+    await initializeBookData();
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+  }
 };
 
 export default dbStart;

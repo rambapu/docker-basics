@@ -15,7 +15,7 @@
 - Docker images are blueprints for containers
 - It has the instructions to run the application
 
-docker build -t book-service:latest .
+CMD: docker build -t book-service:latest .
 
 Here building an image called book-service with tag called latest
 
@@ -23,10 +23,53 @@ It searches for the Dockerfile in the current working directory and builds an im
 
 ### Show all docker images
 
-docker image ls
+CMD: docker image ls
 Or see all the images in Docker desktop
 
 ### Create a docker container from docker image
 
 - We can create multiple containers from the same image with different options / environment variables necessary
--
+
+CMD: docker run -d --name book-service book-service
+
+Here we are starting the container in detached mode instead of the terminal. book-service is the docker container name created from book-service image
+
+CMD: docker container ls
+
+CMD: docker stop book-service --> to stop the container
+
+CMD: docker rm book-service ---> to delete the container
+
+### Access the running container with Port binding
+
+- We need to expose a port to the running container to access the app
+
+CMD: docker run -d -p 3000:3000 --name book-service book-service
+
+The first 3000 is container port which is being exposed. The second port 3000 tells which app is running on. In this case it is 3000.
+
+CMD: docker logs book-service ---> shows the logs of the app
+
+CMD: docker exec -it book-service bash
+
+To interact with the process inside the container in this terminal by creating a bash terminal/
+O/P: this opens the bash terminal - inside the app folder (WORKDIR mentioned in Docker file)
+
+### Running multiple containers for microservices
+
+To manage multiple containers, we use container orchestration systems like docker compose and kubernetes
+
+- for each service, we need images, volumes, env variables and ports
+- Docker compose will create containers for services, volumes and network to communicate
+
+Docker compose has inbuilt DNS service that resolves the service name to container IP address
+
+CMD: docker-compose up -d --build
+
+Build all images and create the containers and run it in detached mode
+
+### Networks
+
+- driver = bridge means it create a private interanal network for the containers to communicate
+
+### Communcation between Containers with Http Requests
