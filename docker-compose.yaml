@@ -12,6 +12,17 @@ services:
     depends_on:
       - book-service-db
 
+  loan-service:
+    build: ./loan-service
+    image: loan-service
+    container_name: loan-service
+    ports:
+      - 3001:3001
+    networks:
+      - app-network
+    environment:
+      - BOOK_SERVICE_URL=http://book-service:3000
+
   book-service-db:
     image: mongo:latest
     container_name: book-service-db
