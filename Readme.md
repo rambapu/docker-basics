@@ -85,3 +85,13 @@ CMD: docker-compose down --> to stop all the containers
 - If we have multiple book-services running, we can distribute the traffic
 - We can hide internal IP address / ports of these containers from the FE for security
 - We can setup authentication, caching, logging in Nginx
+
+### Pushing the docker images to DockerHub
+
+CMD: docker login
+
+CMD: docker build -t rambapu/book-service:v1 .
+
+Building the image with the tag v1 and using the convention of username
+
+CMD: docker push rambapu/book-service:v1
