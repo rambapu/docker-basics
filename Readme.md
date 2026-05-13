@@ -29,6 +29,7 @@ Or see all the images in Docker desktop
 ### Create a docker container from docker image
 
 - We can create multiple containers from the same image with different options / environment variables necessary
+- Docker containers are isolated by default. If they are exposed by ports, then they are accessible
 
 CMD: docker run -d --name book-service book-service
 
@@ -67,6 +68,8 @@ Docker compose has inbuilt DNS service that resolves the service name to contain
 CMD: docker-compose up -d --build
 
 Build all images and create the containers and run it in detached mode
+
+CMD: docker-compose down --> to stop all the containers
 
 ### Networks
 
