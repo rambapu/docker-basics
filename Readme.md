@@ -73,3 +73,12 @@ Build all images and create the containers and run it in detached mode
 - driver = bridge means it create a private interanal network for the containers to communicate
 
 ### Communcation between Containers with Http Requests
+
+- Call the book service from loan service with the Http url
+
+### Reverse Proxy - Nginx
+
+- load balance / reverse proxy is used to direct the traffic to the appropiate microservices
+- If we have multiple book-services running, we can distribute the traffic
+- We can hide internal IP address / ports of these containers from the FE for security
+- We can setup authentication, caching, logging in Nginx
